@@ -9,6 +9,14 @@
   background-color: #d3d3d3;
 }
 
+.clickable-slot.free {
+  background-color: #3ea880;
+}
+
+.clickable-slot.booked {
+  background-color: #f0f0f0;
+}
+
 .clickable-slot:hover:not(.selected) {
   background-color: #f0f0f0;
 }
@@ -17,7 +25,6 @@
   background-color: #dcdcdc;
 }
 
-.disabled {
-  pointer-events: none;
-  opacity: 0.5;
+.custom-select-sm{
+  width: 30%;
 }

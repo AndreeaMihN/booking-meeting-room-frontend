@@ -1,12 +1,10 @@
 <div *ngIf="room" class="card m-4" style="width: 18rem;">
-  <div class="card-body" style="height: 35rem;">
+  <div class="card-body" style="height: 20rem;">
     <h5 class="card-title">{{room.name}}</h5>
+    <hr class="my-2"> <!-- Slim and nice line -->
     <h6 class="card-subtitle mb-2 text-body-secondary">{{room.capacity}} capacity</h6>
     <h6 class="card-subtitle mb-2 text-body-secondary">{{room.floor}} floor</h6>
     <p class="card-text">{{room.description}}</p>
-    <button type="button" class="btn btn-danger me-1 mb-2" (click)="deleteRoom(room._id)">Delete Room</button>
-    <button type="button" class="btn btn-dark mb-2" (click)="bookRoom(room._id)">Book for later</button>
-    <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" [routerLink]="['/rooms', room._id]">More details</a>
+    <button type="button" class="btn btn-dark mb-2" (click)="bookRoom(room._id)">Book</button>
   </div>
 </div>
-

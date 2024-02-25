@@ -1,5 +1,6 @@
 <div *ngIf="rooms$ | async; let rooms" class="flex-container">
-  <div *ngFor="let room of rooms" >
-    <app-room-card [room]="room" (deleteEvent)="deleteRoom($event)"></app-room-card>
+  <input type="text" class="form-control" placeholder="Search by room name" [(ngModel)]="searchQuery" (input)="filterRooms()">
+  <div *ngFor="let room of filteredRooms">
+    <app-room-card [room]="room"></app-room-card>
   </div>
 </div>

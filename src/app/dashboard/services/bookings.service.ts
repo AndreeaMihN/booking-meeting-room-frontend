@@ -17,8 +17,8 @@ export class BookingsService {
     return this.http.get<Booking[]>(this.apiURLBookings);
   }
 
-  getFreeSlotsForRoom(roomId: string, day: string): Observable<Slot[]> {
-    return this.http.get<Slot[]>(`${this.apiURLBookings}/${roomId}/${day}`);
+  getFreeSlotsForRoom(roomId: string, day: string, teamId:string): Observable<Slot[]> {
+    return this.http.get<Slot[]>(`${this.apiURLBookings}/${roomId}/${day}/${teamId}`);
   }
 
   createBooking(booking: Booking): Observable<Booking> {

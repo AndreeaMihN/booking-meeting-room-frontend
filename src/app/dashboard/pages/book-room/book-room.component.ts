@@ -7,6 +7,8 @@ import { BookingsService } from '../../services/bookings.service';
 import moment from 'moment';
 import { Slot } from '../../models/slot';
 import { Booking } from '../../models/booking';
+import { Team } from '../../models/team';
+import { TeamsService } from '../../services/teams.service';
 
 @Component({
   selector: 'app-book-room',
@@ -15,32 +17,40 @@ import { Booking } from '../../models/booking';
 })
 export class BookRoomComponent implements OnInit {
   room$: Observable<Room> = new Observable<Room>();
+  teams$: Observable<Team[]> = new Observable<Team[]>();
   freeSlots$: Observable<Slot[]> = new Observable<Slot[]>();
-  selectedSlot!: Slot;
+  selectedSlot: Slot | undefined = undefined;
   formattedDate!: string;
   roomId!: string;
   slots: Slot[] = [];
+  selectedTeam!: Team;
+  messageError: string | undefined= undefined;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private roomsService: RoomsService, private bookingsService: BookingsService) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private roomsService: RoomsService,
+    private bookingsService: BookingsService,
+    private teamsService: TeamsService
+    ) {
   }
 
   ngOnInit(): void {
     this.roomId = this.activatedRoute.snapshot.params['id'];
     this.room$ = this.roomsService.getRoom(this.roomId);
+    this.teams$ = this.teamsService.getTeams();
   }
 
   handleSlotClick(indexSlot: number, slots: Slot[]) {
-    this.slots = slots;
-    this.slots[indexSlot].booked = !slots[indexSlot].booked;
-    const clickedSlot = slots[indexSlot];
-    if (clickedSlot.booked) return;
-    this.selectedSlot = clickedSlot;
+    this.slots = slots.map(slot => ({ ...slot }));
+    this.slots[indexSlot].booked = !this.slots[indexSlot].booked;
+    this.selectedSlot = this.slots[indexSlot];
   }
 
   createBookingInput(){
     if (!this.slots.length) {
       return {
         roomId: this.roomId,
+        teamId: this.selectedTeam?._id,
         day: this.formattedDate,
         morningBooked: false,
         afternoonBooked: false,
@@ -50,6 +60,7 @@ export class BookRoomComponent implements OnInit {
 
     return {
       roomId: this.roomId,
+      teamId: this.selectedTeam?._id,
       day : this.formattedDate,
       morningBooked: this.slots[0].booked,
       afternoonBooked: this.slots[1].booked,
@@ -57,14 +68,17 @@ export class BookRoomComponent implements OnInit {
     } as Booking;
   }
 
-  createBookingAndRefreshSlots(slots: Slot[]) {
+  updateSlot() {
+    this.messageError = '';
     const booking = this.createBookingInput();
     this.bookingsService.createBooking(booking).subscribe(
       () => {
-        this.router.navigate(['/bookings']);
+        //this.router.navigate(['/bookings']);
+        this.freeSlots$ = this.bookingsService.getFreeSlotsForRoom(this.roomId, this.formattedDate, this.selectedTeam?._id)
       },
       (error) => {
         console.error('Error creating booking:', error);
+        this.messageError = error.error;
       }
     );
   }
@@ -73,7 +87,13 @@ export class BookRoomComponent implements OnInit {
     let selectedDate = event.value;
     const momentDate = moment(selectedDate);
     this.formattedDate = momentDate.format('YYYY-MM-DD');
-    this.freeSlots$ = this.bookingsService.getFreeSlotsForRoom(this.roomId, this.formattedDate)
+    this.freeSlots$ = this.bookingsService.getFreeSlotsForRoom(this.roomId, this.formattedDate, this.selectedTeam?._id)
+  }
+
+  handleTeamChange() {
+    console.log('selected team changed: ',this.selectedTeam)
+    if(this.formattedDate)
+    this.freeSlots$ = this.bookingsService.getFreeSlotsForRoom(this.roomId, this.formattedDate, this.selectedTeam?._id)
   }
 
 }

@@ -12,6 +12,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TeamCardComponent } from './component/team-card/team-card.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BookingsComponent,
     RoomsComponent,
     RoomCardComponent,
-    BookRoomComponent
+    BookRoomComponent,
+    TeamCardComponent
   ],
   imports: [
     CommonModule,

@@ -8,20 +8,25 @@ import { RoomsService } from '../../services/rooms.service';
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.scss'
 })
-export class RoomsComponent implements OnInit {;
+export class RoomsComponent implements OnInit {
   rooms$: Observable<Room[]> = new Observable<Room[]>();
-  constructor(private roomsService: RoomsService){
-    console.log('here RoomsComponent')
-  }
+  filteredRooms: Room[] = [];
+  searchQuery: string = '';
+
+  constructor(private roomsService: RoomsService) { }
+
   ngOnInit(): void {
     this.rooms$ = this.roomsService.getRooms();
+    this.rooms$.subscribe(rooms => this.filteredRooms = rooms);
   }
 
-  bookRoom($event: string){
-
-  }
-
-  deleteRoom($event: string){
-
+  filterRooms(): void {
+    if (this.searchQuery.trim() !== '') {
+      this.filteredRooms = this.filteredRooms.filter(room =>
+        room.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    } else {
+      this.rooms$.subscribe(rooms => this.filteredRooms = rooms);
+    }
   }
 }

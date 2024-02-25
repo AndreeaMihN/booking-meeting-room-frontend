@@ -6,8 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './bookings.component.scss'
 })
 export class BookingsComponent {
-  constructor(){
-    console.log('here BookingsComponent')
+  constructor() {
   }
 
 }
