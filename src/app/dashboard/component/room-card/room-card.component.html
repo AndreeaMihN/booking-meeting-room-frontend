@@ -1,10 +1,12 @@
 <div *ngIf="room" class="card m-4" style="width: 18rem;">
   <div class="card-body" style="height: 20rem;">
     <h5 class="card-title">{{room.name}}</h5>
-    <hr class="my-2"> <!-- Slim and nice line -->
+    <hr class="my-2">
     <h6 class="card-subtitle mb-2 text-body-secondary">{{room.capacity}} capacity</h6>
     <h6 class="card-subtitle mb-2 text-body-secondary">{{room.floor}} floor</h6>
     <p class="card-text">{{room.description}}</p>
-    <button type="button" class="btn btn-dark mb-2" (click)="bookRoom(room._id)">Book</button>
+  </div>
+  <div class="card-footer d-flex justify-content-center align-items-center border-0 bg-transparent">
+    <button type="button" class="btn btn-dark w-75" (click)="bookRoom(room._id)">Book</button>
   </div>
 </div>
