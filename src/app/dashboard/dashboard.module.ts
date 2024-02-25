@@ -6,18 +6,34 @@ import { NavigationBarComponent } from './component/navigation-bar/navigation-ba
 import { BookingsComponent } from './pages/bookings/bookings.component';
 import { RoomsComponent } from './pages/rooms/rooms.component';
 import { RouterModule } from '@angular/router';
+import { RoomCardComponent } from './component/room-card/room-card.component';
+import { BookRoomComponent } from './pages/book-room/book-room.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     NavigationBarComponent,
     BookingsComponent,
-    RoomsComponent
+    RoomsComponent,
+    RoomCardComponent,
+    BookRoomComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-US' } 
   ],
   exports: [NavigationBarComponent]
 })

@@ -1,1 +1,5 @@
-<p>rooms</p>
+<div *ngIf="rooms$ | async; let rooms" class="flex-container">
+  <div *ngFor="let room of rooms" >
+    <app-room-card [room]="room" (deleteEvent)="deleteRoom($event)"></app-room-card>
+  </div>
+</div>
