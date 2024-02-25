@@ -39,17 +39,6 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <!-- <ul class="list-group">
-      <ng-container *ngIf="freeSlots$ | async as freeSlots">
-        <li *ngFor="let slot of freeSlots; let index = index"
-            class="list-group-item clickable-slot"
-            [class.selected]="selectedSlot?.slot === slot?.slot"
-            (click)="handleSlotClick(index, freeSlots)"
-            [ngClass]="{ 'disabled': slot?.booked}">
-          {{ slot.slot }}
-        </li>
-      </ng-container>
-    </ul> -->
     <ul class="list-group">
       <ng-container *ngIf="freeSlots$ | async as freeSlots">
         <li *ngFor="let slot of freeSlots; let index = index"

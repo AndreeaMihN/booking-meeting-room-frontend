@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoomsService } from '../../services/rooms.service';
-import { Observable, mergeMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Room } from '../../models/room';
 import { BookingsService } from '../../services/bookings.service';
 import moment from 'moment';
@@ -29,17 +29,11 @@ export class BookRoomComponent implements OnInit {
     this.room$ = this.roomsService.getRoom(this.roomId);
   }
 
-  // handleSlotClick(indexSlot: number, slots: Slot[]) {
-  //   this.selectedSlot = slots[indexSlot];
-  //   this.slots = slots;
-  //   this.slots[indexSlot].booked = true;
-  // }
-
   handleSlotClick(indexSlot: number, slots: Slot[]) {
     this.slots = slots;
     this.slots[indexSlot].booked = !slots[indexSlot].booked;
     const clickedSlot = slots[indexSlot];
-    if (clickedSlot.booked) return; // Prevent selecting booked slots
+    if (clickedSlot.booked) return;
     this.selectedSlot = clickedSlot;
   }
 
