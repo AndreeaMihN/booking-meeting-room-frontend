@@ -42,6 +42,7 @@ export class BookRoomComponent implements OnInit {
   }
 
   handleSlotClick(indexSlot: number, slots: Slot[]) {
+    this.messageError = '';
     this.slots = slots.map((slot, index) => ({
       ...slot,
       booked: index === indexSlot ? !slot.booked : slot.booked
@@ -91,6 +92,7 @@ export class BookRoomComponent implements OnInit {
   }
 
   handleTeamChange() {
+    this.messageError = '';
     if (this.formattedDate)
       this.freeSlots$ = this.bookingsService.getFreeSlotsForRoom(this.roomId, this.formattedDate, this.selectedTeam?._id)
   }
