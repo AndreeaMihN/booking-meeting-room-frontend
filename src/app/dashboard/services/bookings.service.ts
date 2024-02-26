@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Booking } from '../models/booking';
 import { Observable } from 'rxjs';
 import { Slot } from '../models/slot';
+import { BookingDetails } from '../models/bookingDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class BookingsService {
 
   constructor(private http: HttpClient) {}
 
-  getBookings(): Observable<Booking[]> {
-    return this.http.get<Booking[]>(this.apiURLBookings);
+  getBookings(): Observable<BookingDetails[]> {
+    return this.http.get<BookingDetails[]>(this.apiURLBookings);
   }
 
   getFreeSlotsForRoom(roomId: string, day: string, teamId:string): Observable<Slot[]> {

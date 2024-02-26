@@ -1,0 +1,8 @@
+.container {
+  height: 100vh;
+}
+
+.table-container {
+  height: calc(100% - 100px);
+  overflow-y: auto;
+}

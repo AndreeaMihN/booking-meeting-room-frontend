@@ -1,1 +1,78 @@
-<p>bookings</p>
+<div class="container">
+    <h2>Bookings</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" style="min-width: 200px;">Filter by Morning Availability</span>
+                <select class="form-select" [(ngModel)]="morningFilter" (ngModelChange)="applyFilter()">
+                    <option value="all">All</option>
+                    <option value="true">Booked</option>
+                    <option value="false">Not Booked</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group mb-3">
+                <span class="input-group-text" style="min-width: 200px;">Filter by Afternoon Availability</span>
+                <select class="form-select" [(ngModel)]="afternoonFilter" (ngModelChange)="applyFilter()">
+                    <option value="all">All</option>
+                    <option value="true">Booked</option>
+                    <option value="false">Not Booked</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-warning">
+                <tr>
+                    <th>#</th>
+                    <th>Room name</th>
+                    <th>Team name</th>
+                    <th>Day</th>
+                    <th>Morning slot</th>
+                    <th>Afternoon slot</th>
+                    <th>All day</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let booking of filteredBookings; let i = index" (click)="toggleDetails(i, booking)"
+                    [class.table-active]="selectedRow === i">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ booking.roomId.name }}</td>
+                    <td>{{ booking.teamId.name }}</td>
+                    <td>{{ booking.day | date }}</td>
+                    <td>{{ booking.morningBooked? '&#10003;' : '&#10007;'}}</td>
+                    <td>{{ booking.afternoonBooked? '&#10003;' : '&#10007;'}}</td>
+                    <td>{{ booking.allDayBooked? '&#10003;' : '&#10007;'}}</td>
+                </tr>
+                <tr *ngIf="selectedRow !== undefined" [hidden]="!isDetailsVisible">
+                    <td colspan="7">
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Booking Details</h5>
+                                <div class="mb-3">
+                                    <h6 class="text-secondary">Room:</h6>
+                                    <p>{{ selectedBooking?.roomId?.name }}</p>
+                                    <p>{{ selectedBooking?.roomId?.description }}</p>
+                                    <p>Capacity: {{ selectedBooking?.roomId?.capacity }}</p>
+                                    <p>Floor: {{ selectedBooking?.roomId?.floor }}</p>
+                                </div>
+                                <hr class="my-2">
+                                <div class="mb-3">
+                                    <h6 class="text-secondary">Team:</h6>
+                                    <p>{{ selectedBooking?.teamId?.name }}</p>
+                                    <p>Number of Members: {{ selectedBooking?.teamId?.numberOfMembers }}</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img [src]="selectedBooking?.roomId?.imageUrl" alt="Room Image"
+                                        class="img-fluid mt-2">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -35,7 +35,7 @@ import { TeamCardComponent } from './component/team-card/team-card.component';
     MatNativeDateModule
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'en-US' } 
+    { provide: MAT_DATE_LOCALE, useValue: 'en-US' }
   ],
   exports: [NavigationBarComponent]
 })
