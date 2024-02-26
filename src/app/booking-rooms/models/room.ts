@@ -7,6 +7,6 @@ export interface Room {
   capacity: number
   office: Office,
   imageUrl: string,
-  floor: 1,
+  floor: number,
 }
 
