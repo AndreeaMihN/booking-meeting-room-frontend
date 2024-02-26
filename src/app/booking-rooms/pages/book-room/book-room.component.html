@@ -27,7 +27,7 @@
                 [class.free]="!slot?.booked"
                 [class.booked]="slot?.booked"
                 (click)="handleSlotClick(index, freeSlots)">
-                {{ slot.slot }}
+                <span [class.selected-item]="selectedSlot?.slot === slot?.slot">{{ slot.slot }}</span>
               </li>
             </ng-container>
           </ul>

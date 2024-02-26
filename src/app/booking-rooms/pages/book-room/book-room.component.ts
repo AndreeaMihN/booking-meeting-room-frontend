@@ -9,6 +9,7 @@ import { Slot } from '../../models/slot';
 import { Booking } from '../../models/booking';
 import { Team } from '../../models/team';
 import { TeamsService } from '../../services/teams.service';
+import { SlotEnum } from '../../utils/slot-enum';
 
 @Component({
   selector: 'app-book-room',
@@ -41,32 +42,31 @@ export class BookRoomComponent implements OnInit {
   }
 
   handleSlotClick(indexSlot: number, slots: Slot[]) {
-    this.slots = slots.map(slot => ({ ...slot }));
-    this.slots[indexSlot].booked = !this.slots[indexSlot].booked;
+    this.slots = slots.map((slot, index) => ({
+      ...slot,
+      booked: index === indexSlot ? !slot.booked : slot.booked
+    }));
     this.selectedSlot = this.slots[indexSlot];
   }
 
   createBookingInput() {
-    if (!this.slots.length) {
-      return {
-        roomId: this.roomId,
-        teamId: this.selectedTeam?._id,
-        day: this.formattedDate,
-        morningBooked: false,
-        afternoonBooked: false,
-        allDayBooked: false,
-      };
-    }
+    const selectedSlot = this.slots.find((slot) => slot.slot === this.selectedSlot?.slot);
+    const isSelectedSlotBooked = selectedSlot?.booked || false;
+
+    const morningBooked = selectedSlot?.slot === SlotEnum.Morning ? isSelectedSlotBooked : false;
+    const afternoonBooked = selectedSlot?.slot === SlotEnum.Afternoon ? isSelectedSlotBooked : false;
+    const allDayBooked = selectedSlot?.slot === SlotEnum.AllDay ? isSelectedSlotBooked : false;
 
     return {
       roomId: this.roomId,
       teamId: this.selectedTeam?._id,
       day: this.formattedDate,
-      morningBooked: this.slots[0].booked,
-      afternoonBooked: this.slots[1].booked,
-      allDayBooked: this.slots[2].booked,
+      morningBooked,
+      afternoonBooked,
+      allDayBooked,
     } as Booking;
   }
+
 
   updateSlot() {
     this.messageError = '';
@@ -77,7 +77,8 @@ export class BookRoomComponent implements OnInit {
       },
       (error) => {
         console.error('Error creating booking:', error);
-        this.messageError = error.error;
+        this.messageError = error.error.error;
+        this.freeSlots$ = this.bookingsService.getFreeSlotsForRoom(this.roomId, this.formattedDate, this.selectedTeam?._id)
       }
     );
   }

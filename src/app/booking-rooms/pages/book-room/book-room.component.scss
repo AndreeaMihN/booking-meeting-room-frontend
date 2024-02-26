@@ -15,6 +15,7 @@
 
 .clickable-slot.booked {
   background-color: #f0f0f0;
+  color: black;
 }
 
 .clickable-slot:hover:not(.selected) {
@@ -23,6 +24,11 @@
 
 .clickable-slot:active {
   background-color: #dcdcdc;
+}
+
+.selected-item {
+  font-weight: bold;
+  color: black;
 }
 
 .custom-select-sm {
