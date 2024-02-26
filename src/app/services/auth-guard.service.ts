@@ -6,7 +6,7 @@ import { LocalstorageService } from './localstorage.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanLoad {
-  constructor(private router: Router, private localStorageToken: LocalstorageService) {}
+  constructor(private router: Router, private localStorageToken: LocalstorageService) { }
 
   canLoad() {
     const token = this.localStorageToken.getToken();
@@ -20,7 +20,7 @@ export class AuthGuard implements CanLoad {
     return false;
   }
 
-  private _tokenExpired(expiration:any): boolean {
+  private _tokenExpired(expiration: any): boolean {
     return Math.floor(new Date().getTime() / 1000) >= expiration;
   }
 }

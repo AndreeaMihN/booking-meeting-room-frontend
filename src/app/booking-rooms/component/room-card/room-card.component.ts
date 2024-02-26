@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Room } from '../../models/room';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-room-card',
@@ -13,6 +13,6 @@ export class RoomCardComponent {
   }
 
   bookRoom(id: string) {
-    this.router.navigate(['dashboard/rooms/book', id]);
+    this.router.navigate(['booking/rooms/book', id]);
   }
 }

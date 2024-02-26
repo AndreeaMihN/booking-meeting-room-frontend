@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RoomsService } from '../../services/rooms.service';
 import { Observable } from 'rxjs';
 import { Room } from '../../models/room';
@@ -24,14 +24,14 @@ export class BookRoomComponent implements OnInit {
   roomId!: string;
   slots: Slot[] = [];
   selectedTeam!: Team;
-  messageError: string | undefined= undefined;
+  messageError: string | undefined = undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private roomsService: RoomsService,
     private bookingsService: BookingsService,
     private teamsService: TeamsService
-    ) {
+  ) {
   }
 
   ngOnInit(): void {
@@ -46,7 +46,7 @@ export class BookRoomComponent implements OnInit {
     this.selectedSlot = this.slots[indexSlot];
   }
 
-  createBookingInput(){
+  createBookingInput() {
     if (!this.slots.length) {
       return {
         roomId: this.roomId,
@@ -61,7 +61,7 @@ export class BookRoomComponent implements OnInit {
     return {
       roomId: this.roomId,
       teamId: this.selectedTeam?._id,
-      day : this.formattedDate,
+      day: this.formattedDate,
       morningBooked: this.slots[0].booked,
       afternoonBooked: this.slots[1].booked,
       allDayBooked: this.slots[2].booked,
@@ -90,9 +90,8 @@ export class BookRoomComponent implements OnInit {
   }
 
   handleTeamChange() {
-    console.log('selected team changed: ',this.selectedTeam)
-    if(this.formattedDate)
-    this.freeSlots$ = this.bookingsService.getFreeSlotsForRoom(this.roomId, this.formattedDate, this.selectedTeam?._id)
+    if (this.formattedDate)
+      this.freeSlots$ = this.bookingsService.getFreeSlotsForRoom(this.roomId, this.formattedDate, this.selectedTeam?._id)
   }
 
 }

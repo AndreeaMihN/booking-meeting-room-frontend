@@ -8,5 +8,5 @@ import { Team } from '../../models/team';
 })
 export class TeamCardComponent {
   @Input() team!: Team;
-
+  
 }

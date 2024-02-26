@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { DashboardComponent } from './dashboard.component';
+import { BookingRoomsRoutingModule } from './booking-rooms-routing.module';
+import { BookingRoomsComponent } from './booking-rooms.component';
 import { NavigationBarComponent } from './component/navigation-bar/navigation-bar.component';
 import { BookingsComponent } from './pages/bookings/bookings.component';
 import { RoomsComponent } from './pages/rooms/rooms.component';
@@ -16,7 +16,7 @@ import { TeamCardComponent } from './component/team-card/team-card.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent,
+    BookingRoomsComponent,
     NavigationBarComponent,
     BookingsComponent,
     RoomsComponent,
@@ -26,7 +26,7 @@ import { TeamCardComponent } from './component/team-card/team-card.component';
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule,
+    BookingRoomsRoutingModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
@@ -39,4 +39,4 @@ import { TeamCardComponent } from './component/team-card/team-card.component';
   ],
   exports: [NavigationBarComponent]
 })
-export class DashboardModule { }
+export class BookingRoomsModule { }

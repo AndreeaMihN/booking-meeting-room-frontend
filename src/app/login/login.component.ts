@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private localstorageService: LocalstorageService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._initLoginForm();
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       (user) => {
         this.authError = false;
         this.localstorageService.setToken(user['token']);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/booking']);
       },
       (error: HttpErrorResponse) => {
         this.authError = true;

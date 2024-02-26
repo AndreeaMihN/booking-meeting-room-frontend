@@ -6,7 +6,7 @@ export const routes: Routes = [
   {
     path: 'login', component: LoginComponent
   },
-  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule), canLoad: [AuthGuard] },
+  { path: 'booking', loadChildren: () => import('./booking-rooms/booking-rooms.module').then(m => m.BookingRoomsModule), canLoad: [AuthGuard] },
 ];
 
 @NgModule({

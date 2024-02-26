@@ -12,13 +12,13 @@ import { BookingDetails } from '../models/bookingDetails';
 export class BookingsService {
   apiURLBookings = environment.apiUrl + 'bookings';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getBookings(): Observable<BookingDetails[]> {
     return this.http.get<BookingDetails[]>(this.apiURLBookings);
   }
 
-  getFreeSlotsForRoom(roomId: string, day: string, teamId:string): Observable<Slot[]> {
+  getFreeSlotsForRoom(roomId: string, day: string, teamId: string): Observable<Slot[]> {
     return this.http.get<Slot[]>(`${this.apiURLBookings}/${roomId}/${day}/${teamId}`);
   }
 
