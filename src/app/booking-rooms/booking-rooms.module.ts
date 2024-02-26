@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TeamCardComponent } from './component/team-card/team-card.component';
+import { RoomDetailsComponent } from './component/room-details/room-details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TeamCardComponent } from './component/team-card/team-card.component';
     RoomsComponent,
     RoomCardComponent,
     BookRoomComponent,
-    TeamCardComponent
+    TeamCardComponent,
+    RoomDetailsComponent
   ],
   imports: [
     CommonModule,
