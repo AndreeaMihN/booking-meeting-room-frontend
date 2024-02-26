@@ -73,7 +73,6 @@ export class BookRoomComponent implements OnInit {
     const booking = this.createBookingInput();
     this.bookingsService.createBooking(booking).subscribe(
       () => {
-        //this.router.navigate(['/bookings']);
         this.freeSlots$ = this.bookingsService.getFreeSlotsForRoom(this.roomId, this.formattedDate, this.selectedTeam?._id)
       },
       (error) => {

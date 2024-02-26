@@ -9,19 +9,10 @@ import { Route, Router } from '@angular/router';
 })
 export class RoomCardComponent {
   @Input() room: Room | undefined;
-  @Output() deleteEvent: EventEmitter<string> = new EventEmitter<string>();
-  //@Output() bookRoomEvent: EventEmitter<string> = new EventEmitter<string>();
-  constructor(private router: Router){
-
+  constructor(private router: Router) {
   }
 
-  deleteRoom(id:string){
-    this.deleteEvent.emit(id);
-  }
-
-  bookRoom(id:string){
-    //this.bookRoomEvent.emit(id);
-    console.log(id)
+  bookRoom(id: string) {
     this.router.navigate(['dashboard/rooms/book', id]);
   }
 }
